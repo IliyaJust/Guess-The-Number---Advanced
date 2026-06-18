@@ -135,5 +135,5 @@ Options
             if "normal" not in self.unlocked_difficulties:
                 unlock = input("This difficulty is locked! Are you sure you want to unlock it[y,n]?(Win Easy, 50 Coins): ")
                 if unlock == "y":
-   
+                    pass #Developing...
         
