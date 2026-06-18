@@ -29,6 +29,6 @@ A simple number-guessing game with a powerful plugin system, built for developer
 If you want to run the game from source:
 
 ```bash
-git clone https://github.com/IliyaJust/Guess-The-Number---Advanced/edit/main/README.md
+git clone https://github.com/IliyaJust/Guess-The-Number---Advanced
 cd Guess-The-Number---Advanced
 python main.py
