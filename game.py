@@ -37,7 +37,7 @@ class Game:
             for record, record_data in records_data.items():
                 for key in required_keys:
                     if key not in record_data:
-                        self.errors.append(f"{record} Has Unknown Data.{key} not founded.Details: {record_data}")
+                        self.errors.append(f"{record} Has Unknown Data.{key} not found.Details: {record_data}")
                         print(emoji.emojize(f":cross_mark: {record} Has Unknown Data.", language = 'alias'))
             self.records = records_data
             print(emoji.emojize(":white_check_mark: Records data loaded.", language = 'alias'))
@@ -53,7 +53,7 @@ class Game:
             for challenge, challenge_data in challenges_data.items():
                 for key in required_keys:
                     if key not in challenge_data:
-                        self.errors.append(f"{challenge} Has Unknown Data.{key} not founded.Details: {challenge_data}")
+                        self.errors.append(f"{challenge} Has Unknown Data.{key} not found.Details: {challenge_data}")
                         print(emoji.emojize(f":cross_mark: {challenge} Has Unknown Data.", language = "alias"))
             self.challenges = challenges_data
             print(emoji.emojize(":white_check_mark: Challenges data loaded.", language = "alias"))
