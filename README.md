@@ -1,4 +1,4 @@
-#WARNING: README has some bugs!Wait until creating 'Guess-The-Number---Advanced'!
+# WARNING: README has some bugs!Wait until creating 'Guess-The-Number---Advanced'!
 # 🎯 Guess The Number – GTN
 
 A simple number-guessing game with a powerful plugin system, built for developers who love to tinker.
