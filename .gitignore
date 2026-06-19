@@ -1,0 +1,26 @@
+
+records_data.json
+challenges_data.json
+achievements_data.json
+
+
+.venv/
+venv/
+env/
+
+
+__pycache__/
+*.pyc
+*.pyo
+
+
+.DS_Store
+Thumbs.db
+
+# فایل‌های مربوط به ویرایشگر
+.vscode/
+.idea/
+
+
+*.log
+*.tmp
