@@ -9,5 +9,5 @@ But this is my plan for this game:
 - Challenges
 - Coins
 - Dedicated Shell Language!
-#We are expanding this game!
+# We are expanding this game!
 More features and plans are on the way...
