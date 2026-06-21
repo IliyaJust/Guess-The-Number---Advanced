@@ -1,15 +1,25 @@
 import json
 import emoji
+from sys import exit
 class Game:
     def __init__(self):
         self.errors = []
         self.records = None
         self.challenges = None
-        self.achievements_data = None
+        self.achievements = None
         self.unlocked_difficulties = []
         self.coins = 0
-        with open('firstinfo.json', 'r') as f:
-            self.first_time = json.load(f)["First Time"]
+        try:
+            with open('firstinfo.json', 'r') as f:
+                self.first_time = json.load(f)["First Time"]
+        except (FileNotFoundError, json.JSONDecodeError):
+            warning = input("firstinfo.json has some problem.We want to fix it.fixing this make game think you are a new player!Are you sure you want to fix this?[y, n]: ").lower()
+            if warning == "y":
+                with open("firstinfo.json", 'w') as f:
+                    json.dump({"First Time"}, f)
+            else:
+                exit()
+            
         if self.first_time:
             with open('challenges_data.json', 'w') as f:
                 data = {
@@ -75,6 +85,7 @@ class Game:
                     if key not in required_keys:
                         self.errors.append(f"{achievement} has unknown data.Could not found {key}.Details: {achievement_data}")
                         print(emoji.emojize(f":cross_mark: {achievement} has unknown data!", language = 'alias'))
+            self.achievements = achievements_data
             print(emoji.emojize(":white_check_mark: Achievements data loaded.", language = 'alias'))
         except json.JSONDecodeError:
             print(emoji.emojize(":cross_mark: Achievements data is corrupted!", language = 'alias'))
@@ -136,16 +147,49 @@ Options
                 return {"Easy": {"Guesses": 15, "Reward": 5}}
             elif choose == "2":
                 if "normal" not in self.unlocked_difficulties:
-                    unlock = input(emoji.emojize(":warning: This difficulty is locked! Are you sure you want to unlock it[y,n]?(50 Coins): ", language = 'alias'))
+                    unlock = input(emoji.emojize(":warning: This difficulty is locked! Are you sure you want to unlock it[y,n]?(50 Coins): ", language = 'alias')).lower()
                     if unlock == "y":
                         if self.coins < 50:
                             print(emoji.emojize(":coin: Your coins aren't enough to buy Normal difficulty!"))
                             input("Press enter to continue...")
                             continue
                         self.unlocked_difficulties.append("normal")
-                        print(emoji.emojize(":with_check_mark: Successfully buyed Normal difficulty!"))
+                        print(emoji.emojize(":with_check_mark: Successfully bought Normal difficulty!"))
                         input("Press enter to continue...")
                         continue
+                    continue
+                return {"Normal": {"Guesses": 10, "Reward": 20}}
+            
             elif choose == "3":
-                pass
-        
+                if "hard" not in self.unlocked_difficulties:
+                    unlock = input(emoji.emojize(":warning: This difficulty is locked! Are you sure you want to unlock it[y,n]?(200 Coins, Win Normal 1 Time): ", language = 'alias')).lower()
+                    if unlock == "y":
+                        if self.coins < 200:
+                            print(emoji.emojize(":coin: Your coins aren't enough to buy Hard difficulty!"))
+                            input("Press enter to continue...")
+                            continue
+                        if "Normal Winner" not in self.achievements.keys():
+                            print(emoji.emojize(":sparkles: You should win Normal a time!", language = 'alias'))
+                            input("Press enter to continue...")
+                            continue
+                        self.unlocked_difficulties.append("hard")
+                        print(emoji.emojize(":white_check_mark: Succesfully bought Hard difficulty!", language = "alias"))
+                        input("Press enter to continue...")
+                    continue
+                return {"Hard": {"Guesses": 10, "Reward": 20}}
+            elif choose == "4":
+                if "expert" not in self.unlocked_difficulties:
+                    unlock = input(emoji.emojize(":warning: This difficulty is locked! Are you sure you want to unlock it[y,n]?(400 Coins, Win Hard 2 Times): ", language = 'alias')).lower()
+                    if unlock == "y":
+                        if self.coins < 400:
+                            print(emoji.emojize(":coin: Your coins aren't enough to buy Expert difficulty!"))
+                            input("Press enter to continue...")
+                        if "Hard Winner" not in self.achievements.keys():
+                            print(emoji.emojize(":sparkles: You should win Hard 2 times!", language = 'alias'))
+                            input("Press enter to continue...")
+                        self.unlocked_difficulties.append("expert")
+                        print(emoji.emojize(":white_check_mark: Succesfully bought Expert difficulty!", language = "alias"))
+                        input("Press enter to continue...")
+                        continue
+                    continue
+                return {"Expert": {"Guesses": 13, "Reward": 40}}
