@@ -23,13 +23,13 @@ class Game:
         if self.first_time:
             with open('challenges_data.json', 'w') as f:
                 data = {
-                    "Begginer-C 001": {
+                    "Beginner-C 001": {
                         "Name": "First Win!",
                         "Doc": "Get your first win to win this challenge!",
                         "Reward": "20 Coins" ,
                         "Wins": 0
                         },
-                    "Beginer-C 002": {
+                    "Beginner-C 002": {
                       "Name": "First Lose!:",
                       "Doc": "Lose One Time!",
                       "Reward": "5 Coins",
@@ -81,7 +81,7 @@ class Game:
                 achievements_data = json.load(f)
             required_keys = ["Name", "Doc"]
             for achievement, achievement_data in achievements_data.items():
-                for keys in required_keys:
+                for key in required_keys:
                     if key not in required_keys:
                         self.errors.append(f"{achievement} has unknown data.Could not found {key}.Details: {achievement_data}")
                         print(emoji.emojize(f":cross_mark: {achievement} has unknown data!", language = 'alias'))
@@ -193,3 +193,10 @@ Options
                         continue
                     continue
                 return {"Expert": {"Guesses": 13, "Reward": 40}}
+            elif choose == "11":
+                #self.save_data()
+                exit()
+#Test:
+        
+Game().load_data()
+Game().menu()
